@@ -1,39 +1,78 @@
-# Active Directory Administration Lab
+# Active Directory Administration Labs
 
-A hands-on **Windows Server Active Directory** lab demonstrating fundamental user, group, security, Group Policy, file access, and endpoint administration tasks commonly performed in IT support and systems administration environments.
+Hands-on labs covering Windows Server Active Directory, Group Policy, departmental file access, and identity synchronization with Microsoft Entra ID.
 
-## What I Demonstrated
+Each project includes configuration notes and screenshots of the results.
 
-| Project | Skills Demonstrated |
+## Featured Project: Hybrid Identity
+
+Connected an existing Active Directory domain to Microsoft Entra ID using **Microsoft Entra Connect Sync**.
+
+The project covers:
+
+- Adding an alternate UPN suffix and preparing test users
+- Checking DNS health, domain membership, and Microsoft endpoint connectivity
+- Configuring Password Hash Synchronization
+- Limiting synchronization to a dedicated OU
+- Verifying synchronized users in Entra ID
+- Inspecting a successful delta synchronization operation
+
+The documented results demonstrate directory synchronization. Cloud sign-in and password-change propagation were not separately verified.
+
+[View the Hybrid Identity project](06%20-%20Hybrid-Identity%20%28Entra%20ID%20Sync%29)
+
+## Projects
+
+| Project | What I Practiced |
 | --- | --- |
-| **1. OUs, Users & Security Groups** | Active Directory organization, user creation, Security Groups, account management |
-| **2. Group Policy (GPO)** | GPO creation, OU linking, Security Filtering, policy configuration and testing |
-| **3. File & Folder Permissions** | NTFS permissions, network share permissions, Security Groups, access control |
-| **4. Service Account & Kiosk Configuration** | Service accounts, Windows Autologon, startup configuration, automated application launch |
-| **5. Access-Based Enumeration** | ABE, NTFS permissions, permission inheritance, departmental folder visibility |
+| [OUs, Users and Security Groups](01%20-%20Creating%20OUs%2C%20Security%20Groups%2C%20Users%20and%20their%20passwords) | Creating a departmental OU, adding users, and assigning security group memberships |
+| [Group Policy Configuration](02%20-%20Creating%2C%20linking%20and%20testing%20GPOs) | Creating and linking a GPO, configuring security filtering, and verifying a user restriction |
+| [File and Folder Permissions](03%20-%20file%20permissions) | Configuring SMB share and NTFS permissions, mapping drives, and testing permitted and denied access |
+| [Windows Autologon and Browser Startup](04%20-%20Creating%20a%20service%20account) | Configuring a dedicated interactive account, automatic sign-in, and fullscreen browser launch |
+| [Access-Based Enumeration](05%20-%20Access-Based%20Enumeration%20%28ABE%29) | Configuring departmental folder visibility, NTFS inheritance, and testing with different users |
+| [Hybrid Identity with Entra ID](06%20-%20Hybrid-Identity%20%28Entra%20ID%20Sync%29) | Preparing UPNs, deploying Entra Connect Sync, configuring OU filtering, and verifying synchronized identities |
 
-## Environment
+## Lab Environment
 
-- **Windows Server 2025:** Domain Controller (DC01)
-- **Windows Client VM (Enterprise 11):** Client01
-- **Active Directory Domain:** Ben.local
-- **Group Policy Management**
-- **NTFS & SMB/Windows File Sharing**
+- VMware Workstation
+- Windows Server 2025 domain controller: `DC01`
+- Windows 11 Enterprise client VM: `Client01`
+- Active Directory domain: `Ben.local`
+- Active Directory Domain Services and DNS
+- Group Policy Management
+- SMB file sharing and NTFS permissions
+- Microsoft Entra ID and Entra Connect Sync for the hybrid identity lab
 
-## Key Skills
+Individual project READMEs describe the configuration used for each exercise.
 
-- Active Directory Domain Services (AD DS)
-- Organizational Units (OUs)
-- User & Security Group Management
-- Group Policy Objects (GPOs)
-- Security Filtering & Delegation
-- NTFS & Share Permissions
-- Access-Based Enumeration (ABE)
-- Service Account Configuration
-- Windows Client Administration
+## Verification
 
-## Project Documentation
+Testing included:
 
-Each project contains its own **README.md** with configuration steps, testing procedures, and screenshots demonstrating the implementation.
+- Confirming user membership in departmental security groups
+- Verifying that a targeted user received a Control Panel restriction
+- Accessing an authorized departmental share and confirming access was denied to another
+- Comparing shared-folder visibility between IT and CSR users
+- Restarting a client to verify automatic sign-in and browser startup
+- Confirming that selected AD users appeared in Entra ID with on-premises synchronization enabled
 
-📁 **Browse the project folders above to see the individual configurations and results.**
+## Related PowerShell Project
+
+I also built an **AD User Access Report** that retrieves account status, password information, OU location, and group memberships. It returns structured output that can be exported to CSV.
+
+The project includes successful lookups, nonexistent-user error handling, and CSV export verification.
+
+[View the AD User Access Report](https://github.com/behnamMasoumi/Powershell-Automation-Lab/tree/main/03-AD-User-Access-Report)
+
+## Skills Practiced
+
+- AD user, group, and OU administration
+- Group Policy linking and security filtering
+- Share and NTFS permissions
+- Access-Based Enumeration
+- Windows client configuration
+- Alternate UPN suffixes
+- Microsoft Entra Connect Sync
+- Password Hash Synchronization configuration
+- OU-based synchronization filtering
+- PowerShell queries, DNS diagnostics, and connectivity checks
